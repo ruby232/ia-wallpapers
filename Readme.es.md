@@ -32,3 +32,5 @@ Sí, se quiere ejecutar desde un lugar externo como el crontab, llamar al script
 ```bash
 /path/to/run.sh
 ```
+
+## Integrar con crontab

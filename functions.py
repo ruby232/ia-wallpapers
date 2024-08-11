@@ -2,6 +2,7 @@ import os
 import requests
 import io
 from PIL import Image
+import random
 
 
 def generate_image_online(prompt, image_name, api_key, folder):
@@ -33,12 +34,30 @@ def get_prompt(api_key):
         response = requests.post(API_URL, headers=headers, json=payload)
         return response.content
 
+    themes = [
+        "nature", "space", "abstract", "animals", "food", "art", "music", "sports", "cars", "anime",
+        "movies", "games", "books", "comics", "cartoons", "fantasy", "history", "science", "education", "health",
+        "fashion", "lifestyle", "culture", "travel", "architecture", "design", "photography", "gaming",
+        "programming", "philosophy", "literature", "technology", "engineering", "mathematics", "physics",
+        "chemistry", "biology", "geology", "astronomy", "meteorology", "environment", "ecology", "agriculture",
+        "forestry", "fishing", "mining", "manufacturing", "construction", "transportation", "energy", "utilities",
+        "telecommunications", "internet", "software", "hardware", "networking", "security", "databases", "web",
+        "mobile", "ai", "robotics", "insurtech", "regtech", "legaltech", "edtech", "medtech", "biotech", "pharma",
+        "healthtech", "agtech", "kayak", "foodtech", "cleantech", "greentech", "sustainability", "renewables",
+        "recycling", "waste", "pollution", "savannas", "tundras", "climate", "biodiversity", "conservation",
+        "ecosystems", "wildlife", "oceans", "forests", "deserts", "mountains", "rivers", "lakes", "islands",
+        "parks", "gardens", "farms", "fields", "meadows", "jungles",
+    ]
+
+    # Random theme
+    theme = random.choice(themes)
+
     prompt = query({
         "model": "meta-llama/Meta-Llama-3-8B-Instruct",
         "messages": [
             {
                 "role": "user",
-                "content": "Create a simple prompt to generate a wallpaper on a random theme using IA, with max 100 characters and response only with the prompt."
+                "content": f"Create a simple prompt to generate a wallpaper on a random theme using IA, with max 100 characters and response only with the prompt. Whith the theme: {theme}"
             }
         ],
         "max_tokens": 500,
